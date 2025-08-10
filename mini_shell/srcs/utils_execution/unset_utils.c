@@ -6,17 +6,19 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:48:18 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/06 12:16:12 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 16:13:28 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void delete_env_variable(char *key, t_env **env)
+void	delete_env_variable(char *key, t_env **env)
 {
-	t_env *prev = NULL;
-	t_env *curr = *env;
+	t_env	*prev;
+	t_env	*curr;
 
+	prev = NULL;
+	curr = *env;
 	while (curr)
 	{
 		if (ft_strcmp(curr->key, key) == 0)
@@ -34,32 +36,6 @@ void delete_env_variable(char *key, t_env **env)
 		curr = curr->next;
 	}
 }
-
-// t_env	*create_node(char *key, char *value)
-// {
-// 	t_env	*node;
-
-// 	node = malloc(sizeof(t_env));
-// 	if (!node)
-// 		return (NULL);
-// 	if (key)
-// 		node->key = ft_strdup(key);
-// 	else
-// 		node->key = NULL;
-// 	if (value)
-// 		node->value = ft_strdup(value);
-// 	else
-// 		node->value = NULL;
-// 	node->next = NULL;
-// 	if ((key && !node->key) || (value && !node->value))
-// 	{
-// 		free(node->key);
-// 		free(node->value);
-// 		free(node);
-// 		return (NULL);
-// 	}
-// 	return (node);
-// }
 
 void	free_env_list(t_env *env)
 {

@@ -6,41 +6,51 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:24:13 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/04 17:29:32 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:09:56 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	print_env(char **env_array)
+static void	print_minimal_env(void)
 {
 	t_env	*mini;
 	t_env	*cur;
-	int		i;
+
+	mini = build_minimal_env();
+	cur = mini;
+	while (cur)
+	{
+		if (cur->value && ft_strchr(cur->value, '='))
+			printf("%s\n", cur->value);
+		cur = cur->next;
+	}
+	free(mini->key);
+	free(mini->value);
+	free(mini);
+}
+
+static void	print_env_array(char **env_array)
+{
+	int	i;
 
 	i = 0;
-	if (!env_array || !*env_array)
-	{
-		mini = build_minimal_env();
-		cur = mini;
-		while (cur)
-		{
-			if (cur->value && ft_strchr(cur->value, '='))
-				printf("%s\n", cur->value);
-			cur = cur->next;
-		}
-		// free_env_list(mini);
-		free(mini->key);
-		free(mini->value);
-		free(mini);
-		return ;
-	}
 	while (env_array && env_array[i])
 	{
 		if (ft_strchr(env_array[i], '='))
 			printf("%s\n", env_array[i]);
 		i++;
 	}
+}
+
+void	print_env(char **env_array)
+{
+	if (!env_array || !*env_array)
+	{
+		print_minimal_env();
+		return ;
+	}
+	print_env_array(env_array);
 }
 
 void	builtin_env(t_env *env)

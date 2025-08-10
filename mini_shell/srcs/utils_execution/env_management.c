@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oafidi <oafidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 03:41:56 by oafidi            #+#    #+#             */
-/*   Updated: 2025/08/03 03:41:58 by oafidi           ###   ########.fr       */
+/*   Updated: 2025/08/10 16:03:36 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static size_t	get_equal_index(const char *str)
 {
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
 	return (i);
@@ -32,25 +33,27 @@ t_env	*create_node(char *str, int add_equal)
 	eq_idx = get_equal_index(str);
 	node->kv = ft_strdup(str);
 	if (str[eq_idx] == '=')
-    {
-        node->key = ft_substr(str, 0, eq_idx + add_equal);
-        node->value = ft_strdup(str + eq_idx + 1);
-    }
+	{
+		node->key = ft_substr(str, 0, (eq_idx + add_equal));
+		node->value = ft_strdup(str + eq_idx + 1);
+	}
 	else
-    {
-        node->key = ft_substr(str, 0, eq_idx);
-        node->value = ft_strdup("");
-    }
-	node->next = NULL; 
+	{
+		node->key = ft_substr(str, 0, eq_idx);
+		node->value = ft_strdup("");
+	}
+	node->next = NULL;
 	return (node);
 }
 
 t_env	*copy_environment(char **env)
 {
-	t_env	*head = NULL;
-	t_env	*last = NULL;
+	t_env	*head;
+	t_env	*last;
 	t_env	*new;
 
+	head = NULL;
+	last = NULL;
 	if (!env || !*env)
 		return (build_minimal_env());
 	while (env && *env)

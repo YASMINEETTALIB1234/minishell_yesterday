@@ -36,56 +36,56 @@ extern int	g_sig;
 
 typedef enum e_token_type
 {
-    TOKEN_WORD,
-    TOKEN_PIPE,
-    TOKEN_REDIR_IN,
-    TOKEN_REDIR_OUT,
-    TOKEN_APPEND,
-    TOKEN_HEREDOC,
-    TOKEN_END
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT,
+	TOKEN_APPEND,
+	TOKEN_HEREDOC,
+	TOKEN_END
 }   t_token_type;
 
 typedef struct s_token
 {
-    char            *value;
-    t_token_type    type;
-    struct s_token  *next;
-    struct s_token  *prev;
+	char            *value;
+	t_token_type    type;
+	struct s_token  *next;
+	struct s_token  *prev;
 }   t_token;
 
 typedef struct s_redir
 {
-    t_token_type    type;
-    char            *target;
-    char            *file; // file for heredoc
-    int             fd; // file descriptor for heredoc
-    int             ambiguous_flag;
-    int             should_expand;
-    struct s_redir  *next;
+	t_token_type    type;
+	char            *target;
+	char            *file; // file for heredoc
+	int             fd; // file descriptor for heredoc
+	int             ambiguous_flag;
+	int             should_expand;
+	struct s_redir  *next;
 }   t_redir;
 
 typedef struct s_cmd
 {
-    char			*line;
-    char            **args;
-    t_redir         *redirs;
-    struct s_cmd    *next;
-    struct s_env			*env;
+	char			*line;
+	char            **args;
+	t_redir         *redirs;
+	struct s_cmd    *next;
+	struct s_env			*env;
 }   t_cmd;
 
 typedef struct s_env
 {
-    char			*key;
+	char			*key;
 	char			*value;
-    char			*kv;
-    struct s_env    *next;
+	char			*kv;
+	struct s_env    *next;
 }   t_env;
 
 typedef struct global_struct
 {
-    t_env   *env;
-    t_token *tokens;
-    t_cmd	*cmds;
+	t_env   *env;
+	t_token *tokens;
+	t_cmd	*cmds;
 }   global_struct;
 
 // libft functions
@@ -131,6 +131,8 @@ t_env	*copy_environment(char **env);
 // builtins check
 int		execute_builtin(char **args, t_env **env);
 int		check_builtin(char *cmd);
+void    free_strarray(char **arr);
+int		size_list(t_cmd *head);
 
 // builtins
 int		cd_command(int argc, char **argv, t_env **env);
@@ -143,6 +145,12 @@ void	builtin_env(t_env *env);
 
 // execute commandes
 void execute_command(t_cmd *cmd_head, char **herdocs, t_env **env, int herdocs_count);
+void run_child(t_cmd *cmd, int input_fd, int pipe_fd[2], t_env **env);
+void execute_external(t_cmd *cmd, t_env **env);
+void run_pipeline(t_cmd *cmd, char **herdocs, t_env **env);
+int is_single_builtin(t_cmd *cmd);
+void run_single_builtin(t_cmd *cmd, t_env **env);
+void try_exec_in_path(t_cmd *cmd, char *path);
 
 // rederections
 int		ft_wait(pid_t *last_pid);

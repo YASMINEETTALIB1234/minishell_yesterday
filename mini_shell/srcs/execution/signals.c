@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 12:22:26 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/08 16:12:35 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:40:38 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,21 @@ void	handle_sigint(int sig)
 	}
 	if (pid != 0)
 	{
+		exit_status_set(1);
 		if (g_sig == 2)
 		{
-			exit_status_set(1);
 			g_sig = 3;
 			ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		}
 		else
 		{
 			g_sig = 0;
-			exit_status_set(1);
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();
 		}
 	}
 }
-
-
 
 void	handle_sigquit(int sig)
 {
@@ -81,4 +78,3 @@ int	ft_wait(pid_t *last_pid)
 	}
 	return (exit_status);
 }
-

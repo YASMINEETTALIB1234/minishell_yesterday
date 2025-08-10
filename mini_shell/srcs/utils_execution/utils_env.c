@@ -6,22 +6,11 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 19:35:03 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/06 16:09:35 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 16:10:39 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// char	*get_env_value(t_env *env, const char *key)
-// {
-// 	while (env)
-// 	{
-// 		if (env->key && ft_strcmp(env->key, (char *)key) == 0)
-// 			return (env->value);
-// 		env = env->next;
-// 	}
-// 	return (NULL);
-// }
 
 void	set_env(t_env **env, const char *key, const char *value)
 {
@@ -62,7 +51,6 @@ static size_t	count_valid_env(t_env *env)
 			count++;
 		env = env->next;
 	}
-	// printf("count is %d :", count);
 	return (count);
 }
 

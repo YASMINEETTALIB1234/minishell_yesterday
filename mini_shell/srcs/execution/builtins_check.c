@@ -6,12 +6,11 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:11:58 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/09 18:01:06 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:11:58 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 int	check_builtin(char *cmd)
 {
@@ -55,6 +54,5 @@ int	execute_builtin(char **args, t_env **env)
 	if (!argc)
 		return (1);
 	result = handle_builtin(args, env, argc);
-	printf("%d", result);
 	return (result);
 }

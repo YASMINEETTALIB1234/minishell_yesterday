@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 12:22:01 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/09 19:18:15 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 18:49:55 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	handle_input_redirection(char *file, int ambiguous_flag)
 		return (ft_putstr_fd(AMBIGUOUS_MESSAGE, 2), -1);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (-1); //permission denied
+		return (ft_putstr_fd(TARGET_NOT_FOUND, 2),-1);
 	if (dup2(fd, STDIN_FILENO) == -1)
 	{
 		perror("dup2");

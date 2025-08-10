@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 17:06:25 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/09 18:03:30 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:34:48 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static int	read_heredoc_loop(t_redir *redir, t_env *env)
 	return (0);
 }
 
-char	*handle_heredoc_input(t_redir *redir, char **heredocs, t_env *env , int index)
+char	*handle_heredoc_input(t_redir *redir, char **heredocs,
+		t_env *env, int index)
 {
 	char	*filename;
 	int		interrupted;

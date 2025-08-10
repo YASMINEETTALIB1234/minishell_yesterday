@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:50:59 by oafidi            #+#    #+#             */
-/*   Updated: 2025/08/09 19:27:41 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:20:08 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void    minishell_loop(char **env)
         global_struct.tokens = lexer(input);
         global_struct.cmds = parser(global_struct.tokens, &global_struct);
         heredoc = herdoc_init(global_struct.tokens); // you need to protect malloc
-        print_cmd_list(global_struct.cmds);
+        // print_cmd_list(global_struct.cmds);
         // heredoc = NULL;
         execute_command(global_struct.cmds,  heredoc, &global_struct.env, count_heredocs(global_struct.tokens));
         // i need to free everything

@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:48:07 by yettalib          #+#    #+#             */
-/*   Updated: 2025/07/29 19:37:14 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 16:04:07 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ char	*join_kv(const char *key, const char *val)
 	out[k + v + 1] = '\0';
 	return (out);
 }
-
