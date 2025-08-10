@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:32:54 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/10 18:44:41 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 20:50:14 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	execute_external(t_cmd *cmd, t_env **env)
 {
 	char	*path;
 
-	if(!cmd->args || !cmd->args[0])
+	if (!cmd->args || !cmd->args[0])
 		return ;
 	path = get_env_value(*env, "PATH");
 	if (!path || ft_strchr(cmd->args[0], '/'))

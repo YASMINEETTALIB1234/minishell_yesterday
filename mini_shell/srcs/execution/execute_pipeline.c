@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:30:33 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/10 19:50:16 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/10 20:50:39 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	run_pipeline(t_cmd *cmd, char **herdocs, t_env **env)
 	while (cmd)
 	{
 		run_pipeline_iteration(&cmd, &input_fd, &last_pid, env);
-		
 	}
 	run_pipeline_cleanup(&input_fd, &last_pid, herdocs, heredoc_index);
 }
