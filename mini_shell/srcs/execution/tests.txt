@@ -1,0 +1,40 @@
+
+cat | cat | ls
+
+bash-3.2$ unset PATh
+bash-3.2$ unset PATH
+bash-3.2$ ls
+bash: ls: No such file or directory
+bash-3.2$ ./ls
+bash: ./ls: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/yettalib/Desktop/minihell
+bash-3.2$ cd 
+.DS_Store             .vscode/              minishell_finall_sig/ parsing/              
+bash-3.2$ cd minishell_finall_sig/minishell_v1-master/execution/
+bash-3.2$ ls
+bash: ls: Permission denied
+bash-3.2$ chmod 777 ls
+bash: chmod: No such file or directory
+bash-3.2$ /bin/chmod 777 ls
+bash-3.2$ ls
+bash-3.2$ ./ls
+
+
+
+
+
+
+
+
+
+
+
+
+
+<< $"$"USER cat
+
+exit "    1   "
+
+
+
