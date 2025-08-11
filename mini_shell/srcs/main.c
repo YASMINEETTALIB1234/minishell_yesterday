@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:50:59 by oafidi            #+#    #+#             */
-/*   Updated: 2025/08/10 13:20:08 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:47:15 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void    minishell_loop(char **env)
         // heredoc = NULL;
         execute_command(global_struct.cmds,  heredoc, &global_struct.env, count_heredocs(global_struct.tokens));
         // i need to free everything
+        // free(heredoc);
         free(input);
     }
 }

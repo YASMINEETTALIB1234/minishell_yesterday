@@ -6,7 +6,7 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:30:33 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/11 10:59:01 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/11 19:15:36 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	run_pipeline_iteration(t_cmd **cmd, int *input_fd,
 		if (pid == -1)
 		{
 			perror("fork");
+			close(pipe_fd[0]);
+			close(pipe_fd[1]);
 			break ;
 		}
 		else if (pid == 0)
