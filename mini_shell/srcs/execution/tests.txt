@@ -34,7 +34,7 @@ bash-3.2$ ./ls
 
 << $"$"USER cat
 
-exit "    1   "
+env + other parametre.
 
 
 

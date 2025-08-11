@@ -142,6 +142,7 @@ int		ft_exit(char **args, int must_exit_);
 int		ft_unset(char **args, t_env **env);
 void	print_env(char **env_array);
 void	builtin_env(t_env *env);
+void	create_pipe_if_needed(t_cmd *cmd, int pipe_fd[2]);
 
 // execute commandes
 void execute_command(t_cmd *cmd_head, char **herdocs, t_env **env, int herdocs_count);

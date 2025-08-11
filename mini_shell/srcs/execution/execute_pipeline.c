@@ -6,53 +6,53 @@
 /*   By: yettalib <yettalib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:30:33 by yettalib          #+#    #+#             */
-/*   Updated: 2025/08/10 20:50:39 by yettalib         ###   ########.fr       */
+/*   Updated: 2025/08/11 10:59:01 by yettalib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	create_pipe_if_needed(t_cmd *cmd, int pipe_fd[2])
+static void	update_fds(int *input_fd, int pipe_fd[2], t_cmd **cmd)
 {
-	if (cmd->next && pipe(pipe_fd) == -1)
+	if (*input_fd != 0)
+		close(*input_fd);
+	if ((*cmd)->next)
 	{
-		perror("pipe");
-		exit_status_set(1);
-		exit(EXIT_FAILURE);
+		close(pipe_fd[1]);
+		*input_fd = pipe_fd[0];
 	}
+	else
+		*input_fd = 0;
 }
 
-static void	handle_fork_error(void)
+static void	update_state(t_cmd **cmd, pid_t *last_pid, pid_t pid)
 {
-	perror("fork");
-	exit(EXIT_FAILURE);
+	*last_pid = pid;
+	*cmd = (*cmd)->next;
 }
 
-static void	run_pipeline_iteration(t_cmd **cmd, int *input_fd,
-			pid_t *last_pid, t_env **env)
+void	run_pipeline_iteration(t_cmd **cmd, int *input_fd,
+		pid_t *last_pid, t_env **env)
 {
 	int		pipe_fd[2];
 	pid_t	pid;
 
-	create_pipe_if_needed(*cmd, pipe_fd);
-	pid = fork();
-	if (pid == -1)
-		handle_fork_error();
-	else if (pid == 0)
-		run_child(*cmd, *input_fd, pipe_fd, env);
-	else
+	while (*cmd)
 	{
-		if (*input_fd != 0)
-			close(*input_fd);
-		if ((*cmd)->next)
+		create_pipe_if_needed(*cmd, pipe_fd);
+		pid = fork();
+		if (pid == -1)
 		{
-			close(pipe_fd[1]);
-			*input_fd = pipe_fd[0];
+			perror("fork");
+			break ;
 		}
+		else if (pid == 0)
+			run_child(*cmd, *input_fd, pipe_fd, env);
 		else
-			*input_fd = 0;
-		*last_pid = pid;
-		*cmd = (*cmd)->next;
+		{
+			update_fds(input_fd, pipe_fd, cmd);
+			update_state(cmd, last_pid, pid);
+		}
 	}
 }
 
@@ -74,9 +74,6 @@ void	run_pipeline(t_cmd *cmd, char **herdocs, t_env **env)
 	input_fd = 0;
 	last_pid = -1;
 	heredoc_index = 0;
-	while (cmd)
-	{
-		run_pipeline_iteration(&cmd, &input_fd, &last_pid, env);
-	}
+	run_pipeline_iteration(&cmd, &input_fd, &last_pid, env);
 	run_pipeline_cleanup(&input_fd, &last_pid, herdocs, heredoc_index);
 }
